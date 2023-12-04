@@ -8,38 +8,37 @@ import { StatusBar } from "expo-status-bar";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Welcome from './Pages/WelcomeScreen/Welcome';
 import {Ionicons} from '@expo/vector-icons'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Drawer = createDrawerNavigator();
 const App = () => {
   const Stack = createDrawerNavigator();
-
+  const BottomTabNavigator = createBottomTabNavigator();
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Drawer.Navigator screenOptions={{
+       
+        <BottomTabNavigator.Navigator screenOptions={{
             headerStyle:{backgroundColor:'#3c0a6b'},
             headerTintColor:'white',
-            drawerActiveBackgroundColor:'#f0e1ff',
-            drawerActiveTintColor:'#3c0a6b'
+            tabBarActiveBackgroundColor:'#ccc'
         }}>
-          <Drawer.Screen
+          <BottomTabNavigator.Screen
             name="homeScreen"
             component={Home}
             options={{
-              drawerLabel:"Home Screen", 
-              drawerIcon:({color,size})=>{
-                return <Ionicons name='home' size={size} color={color}/>
-              }
+              tabBarLabel: "Home",
+              tabBarActiveTintColor: '#3c0a6b',
+             tabBarIcon:({color,size})=><Ionicons name='home' size={size} color={color} />
             }}
           />
-          <Drawer.Screen name='welcome' component={Welcome} options={{
-            drawerLabel:"User",
-            drawerIcon:({color,size})=>{
-                return <Ionicons color={color} name='person' size={size}/>
-            }
+          <BottomTabNavigator.Screen name='welcome' component={Welcome} options={{
+            tabBarActiveTintColor: '#3c0a6b',
+            tabBarLabel: "User",
+            tabBarIcon:({color,size})=><Ionicons name='person' size={size} color={color} />
           }}/>
-        </Drawer.Navigator>
-      </NavigationContainer>
-      <StatusBar style="dark" />
+        </BottomTabNavigator.Navigator>
+      </NavigationContainer> 
+      <StatusBar style="light" />
     </View>
   );
 };
